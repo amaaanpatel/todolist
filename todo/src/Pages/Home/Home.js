@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import NavBar from '../../Components/navbar/navbar';
 // importing the components from react Bootstrap
-import { Container,Row,Col ,ListGroup,ListGroupItem,InputGroup,FormControl,Button,Form} from 'react-bootstrap';
+import { Container,Row,Col ,ListGroup,ListGroupItem,InputGroup,FormControl,Button,Form,Badge} from 'react-bootstrap';
 // import css
 import './Home.css'
 
@@ -35,9 +35,6 @@ class Home extends Component {
                                         <Form.Control as="select">
                                             <option>1</option>
                                             <option>2</option>
-                                            <option>3</option>
-                                            <option>4</option>
-                                            <option>5</option>
                                         </Form.Control>
                                     </Form.Group>
                                     <Form.Group as={Col} md = "2">
@@ -48,11 +45,27 @@ class Home extends Component {
                             </div>
                         <div className="todolistGroup">
                         <ListGroup>
-                            <ListGroup.Item>Cras justo odio</ListGroup.Item>
-                            <ListGroup.Item>Dapibus ac facilisis in</ListGroup.Item>
-                            <ListGroup.Item>Morbi leo risus</ListGroup.Item>
-                            <ListGroup.Item>Porta ac consectetur ac</ListGroup.Item>
-                            <ListGroup.Item>Vestibulum at eros</ListGroup.Item>
+                            <ListGroup.Item>
+                                <Row>
+                                    <Col md = '9'>
+                                    <div className="listInput"> 
+                                    <Form.Control
+                                            type="text"
+                                            disabled
+                                            value="this is a test"
+                                        />
+                                    </div>
+                                    </Col>
+                                    <Col md="3">
+                                    <div style={{display:'flex',justifyContent:'center',alignItems:'center'}}>
+                                    <Form.Check type="checkbox" label="" />
+                                    <Badge variant="primary" style={{margin:'5px'}}>Save</Badge>
+                                    <Badge variant="secondary" style={{margin:'5px'}}>Edit</Badge>
+                                    <Badge variant="warning" style={{margin:'5px'}}>Delete</Badge>
+                                    </div>
+                                    </Col>
+                                </Row>
+                            </ListGroup.Item>
                         </ListGroup>
                         </div>
                     </div>
