@@ -16,7 +16,7 @@ class Items extends Component {
         console.log(this.props.item)
         this.setState({
             isChecked:this.props.item.isChecked,
-            desc:this.props.item.desc
+            desc:this.props.item.description
         })
     }
     //update the todo task

@@ -12,3 +12,17 @@ export async function getHomePageData() {
 
     }
 }
+
+export async function insertList(userInput,selectedBucket) {
+    try {
+        let resp = await axios.post('http://localhost:5000/insertList',{desc:userInput,bucket:selectedBucket},{
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        });
+        console.log(resp.data);
+        return resp.data
+    } catch (error) {
+
+    }
+}

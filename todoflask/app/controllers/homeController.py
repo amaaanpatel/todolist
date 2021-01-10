@@ -2,9 +2,7 @@ from flask import Flask,redirect, url_for, request ,jsonify
 from app import mysql
 
 def homeController():
-  # result = [{"desc" : "want to complete this", "isChecked": "false","type":"list", "id":1, "bucketName": "one" }]
   try:
-    print("test")
     conn =  mysql.connection.cursor()
     conn.execute("SELECT * FROM todo")
     data=conn.fetchall()
@@ -14,3 +12,19 @@ def homeController():
   except Exception as e:
     print("error",e)
     return jsonify([])
+  
+  
+def insertList(request):
+  try:
+    data = request.get_json()
+    conn =  mysql.connection
+    query = "INSERT INTO todo (DESCRIPTION,bucketid) VALUES ('{}',{})".format(data['desc'],data["bucket"])
+    print(query)
+    conn.cursor().execute(query)   
+    print(conn.insert_id())
+    insertId = conn.insert_id()
+    conn.commit()
+    return jsonify({"status":"true","id":insertId})
+  except Exception as e:
+    print("error",e)
+    return jsonify({"status":false})

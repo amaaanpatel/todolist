@@ -8,4 +8,8 @@ from app.controllers import homeController
 def home():
   return homeController.homeController()
 
+@app.route('/insertList',methods = ['POST'])
+def insertList():
+  return homeController.insertList(request)
+
 

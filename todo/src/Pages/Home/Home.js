@@ -4,7 +4,7 @@ import Items from '../../Components/Items/items';
 import InputComp from '../../Components/InputComp/InputComp';
 // importing the components from react Bootstrap
 import { Container,ListGroup } from 'react-bootstrap';
-import { getHomePageData } from '../../Actions/homedata'
+import { getHomePageData,insertList } from '../../Actions/homedata'
 // import css
 import './Home.css'
 
@@ -26,10 +26,14 @@ class Home extends Component {
         })
     }
     //add the items to the to do list 
-    addTask = (userInput,selectedBucket,type) => {
+    addTask = async (userInput,selectedBucket,type) => {
+        let resp = await insertList(userInput,selectedBucket,type);
+        console.log(resp);
+        if(resp.status) {
         let items = this.state.items
-        items.push({ desc: userInput, isChecked: false, bucketName:selectedBucket })
+        items.push({ description: userInput, isChecked: false, bucketName:selectedBucket })
         this.setState({ items: items })
+        }
     }
 
     render() {
