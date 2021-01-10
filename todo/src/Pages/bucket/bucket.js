@@ -5,7 +5,7 @@ import InputComp from '../../Components/InputComp/InputComp';
 // importing the components from react Bootstrap
 import { Container, ListGroup } from 'react-bootstrap';
 
-class List extends Component {
+class bucket extends Component {
     constructor() {
         super();
         this.state = {
@@ -60,5 +60,5 @@ class List extends Component {
     }
 }
 
-export default List;
+export default bucket;
 

@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import Home from './Pages/Home/Home'
-import List from './Pages/List/List'
+import bucket from './Pages/bucket/bucket'
 import reportWebVitals from './reportWebVitals';
 import {
   Route,
@@ -16,7 +16,7 @@ ReactDOM.render(
       {/* <App /> */}
       <Switch>
         <Route exact path="/" component={Home} />
-        <Route exact path="/list" component={List} />
+        <Route exact path="/bucket" component={bucket} />
       </Switch>
     </Router>
   </React.StrictMode>,
