@@ -4,6 +4,7 @@ import Items from '../../Components/Items/items';
 import InputComp from '../../Components/InputComp/InputComp';
 // importing the components from react Bootstrap
 import { Container,ListGroup } from 'react-bootstrap';
+import { getHomePageData } from '../../Actions/homedata'
 // import css
 import './Home.css'
 
@@ -13,14 +14,16 @@ class Home extends Component {
     constructor() {
         super();
         this.state = {
-            items: [{desc : "want to complete this", isChecked: false,type:"list", id:1, bucketName: "one" },
-            { desc: "want to complete this 2", isChecked: true, bucketName: "two",type:"list", id:1}],
+            items: [],
             taskInput: "",
 
         }
     }
-    componentDidMount() {
-
+   async  componentDidMount() {
+        let homedata = await getHomePageData();
+        this.setState({
+            items:homedata
+        })
     }
     //add the items to the to do list 
     addTask = (userInput,selectedBucket,type) => {
