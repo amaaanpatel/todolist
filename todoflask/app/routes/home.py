@@ -8,8 +8,13 @@ from app.controllers import homeController
 def home():
   return homeController.homeController()
 
-@app.route('/insertList',methods = ['POST'])
+@app.route('/insertlist',methods = ['POST'])
 def insertList():
   return homeController.insertList(request)
+
+
+@app.route('/deleteitems',methods = ['POST'])
+def deleteItem():
+  return homeController.deleteItem(request)
 
 

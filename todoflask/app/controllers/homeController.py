@@ -28,3 +28,18 @@ def insertList(request):
   except Exception as e:
     print("error",e)
     return jsonify({"status":false})
+  
+  
+def deleteItem(request):
+  try:
+    data = request.get_json()
+    print(data)
+    conn =  mysql.connection
+    query = "DELETE FROM todo WHERE id = {}".format(data['itemId'])
+    print(query)
+    conn.cursor().execute(query)   
+    conn.commit()
+    return jsonify({"status":"true"})
+  except Exception as e:
+    print("error",e)
+    return jsonify({"status":"false"})

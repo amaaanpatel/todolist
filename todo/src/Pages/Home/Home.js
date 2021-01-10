@@ -4,7 +4,7 @@ import Items from '../../Components/Items/items';
 import InputComp from '../../Components/InputComp/InputComp';
 // importing the components from react Bootstrap
 import { Container,ListGroup } from 'react-bootstrap';
-import { getHomePageData,insertList } from '../../Actions/homedata'
+import { getHomePageData,insertList ,deletItem} from '../../Actions/homedata'
 // import css
 import './Home.css'
 
@@ -27,12 +27,32 @@ class Home extends Component {
     }
     //add the items to the to do list 
     addTask = async (userInput,selectedBucket,type) => {
+        if(selectedBucket == '') {
+            return
+        }
         let resp = await insertList(userInput,selectedBucket,type);
         console.log(resp);
         if(resp.status) {
         let items = this.state.items
-        items.push({ description: userInput, isChecked: false, bucketName:selectedBucket })
+        items.push({ description: userInput, isChecked: false, bucketName:selectedBucket,id:resp.id})
         this.setState({ items: items })
+        }
+    }
+
+    //delete items
+    deleteItems = async (itemId)=>{
+        let resp = await deletItem(itemId);
+        console.log(resp)
+        if(resp.status) {
+            let items_array = this.state.items
+            let itemindex = "";
+            items_array = items_array.filter((data,index)=>{
+                if(data.id != itemId) {
+                    return true
+                }
+                return false
+            })
+            this.setState({ items: items_array })
         }
     }
 
@@ -56,7 +76,10 @@ class Home extends Component {
                                     {
                                         this.state.items.map((item,index) => {
                                             return (
-                                                <Items key={index} type="todolist" item={item} />
+                                                <Items 
+                                                key={item.id} 
+                                                type="todolist" item={item} 
+                                                deleteItems = {this.deleteItems}/>
                                             )
                                         })
                                     }

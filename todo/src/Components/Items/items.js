@@ -9,14 +9,16 @@ class Items extends Component {
             disableInput : true,
             is_edit:false,
             isChecked:false,
-            desc:''
+            desc:'',
+            itemId:''
         }
     }
     componentDidMount() {
         console.log(this.props.item)
         this.setState({
             isChecked:this.props.item.isChecked,
-            desc:this.props.item.description
+            desc:this.props.item.description,
+            itemId:this.props.item.id
         })
     }
     //update the todo task
@@ -39,10 +41,7 @@ class Items extends Component {
             is_edit:false
         })
     }
-    //delete items
-    deleteItems = ()=>{
-
-    }
+    
     //items complete checked
     itemChecked = (data)=>{
         this.setState({
@@ -90,7 +89,7 @@ class Items extends Component {
                             <Badge 
                             variant="warning" 
                             style={{ margin: '5px' }}
-                            onClick={()=>{this.deleteItems()}}
+                            onClick={()=>{this.props.deleteItems(this.state.itemId)}}
                             >Delete</Badge>
                         </div>
                     </Col>
