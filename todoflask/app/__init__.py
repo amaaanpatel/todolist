@@ -1,5 +1,6 @@
 import os,json,datetime
 from flask import Flask,jsonify, request, make_response, send_from_directory
+from flask_mysqldb import MySQL
 
 
 
@@ -7,6 +8,15 @@ from flask import Flask,jsonify, request, make_response, send_from_directory
 app = Flask(__name__)
 #run the falsk app in debug mode
 app.config['DEBUG'] = True
+
+app.config['MYSQL_HOST'] = 'localhost'
+app.config['MYSQL_USER'] = 'amaan'
+app.config['MYSQL_PASSWORD'] = 'password'
+app.config['MYSQL_DB'] = 'local'
+app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
+
+mysql = MySQL(app)
+
 # app.config["CACHE_TYPE"] = "null"
 
 # import all the routes from the routes package
