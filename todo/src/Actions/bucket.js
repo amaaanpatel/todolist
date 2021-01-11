@@ -26,3 +26,18 @@ export async function insertBucket(userInput,selectedBucket) {
 
     }
 }
+
+export async function deleteBucket(itemId) {
+    try {
+        let resp = await axios.post('http://localhost:5000/deletebucket',{itemId:itemId},{
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        });
+        console.log(resp.data);
+        return resp.data
+    } catch (error) {
+
+    }
+}
+

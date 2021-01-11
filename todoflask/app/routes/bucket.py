@@ -13,9 +13,9 @@ def insertBucket():
   return bucketController.insertBucket(request)
 
 
-# @app.route('/deleteitems',methods = ['POST'])
-# def deleteItem():
-#   return homeController.deleteItem(request)
+@app.route('/deletebucket',methods = ['POST'])
+def deleteBucket():
+  return bucketController.deleteBucket(request)
 
 # @app.route('/updateitem',methods = ['POST'])
 # def updateitem():
