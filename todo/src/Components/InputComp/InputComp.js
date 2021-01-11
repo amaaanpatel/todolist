@@ -6,14 +6,15 @@ class InputComp extends Component {
         super(props);
         this.state = {
             userInput:"",
-            type:'todolist',
-            selectedBucket:""
+            // type:'todolist',
+            selectedBucket:"",
+            selectedBucketId:""
         }
     }
     componentDidMount() {
-        this.setState({
-            type:this.props.type
-        })
+        // this.setState({
+        //     type:this.props.type
+        // })
     }
 
     //update the filed on change
@@ -22,20 +23,20 @@ class InputComp extends Component {
     }
 
     //select the bucket
-    selectBucket = (data) => {
-        this.setState({ selectedBucket: data })
-        console.log(data)
+    selectBucket = (id,event) => {
+        console.log(id,event.target.options[event.target.options.selectedIndex].label)
+        this.setState({selectedBucketId: id,selectedBucket:event.target.options[event.target.options.selectedIndex].label})
+        console.log(id)
     }
     render() {
         return (
             <Form.Row>
-                {this.state.type != 'bucket' ?
+                {this.props.type != 'bucket' ?
                     <>
                         <Form.Group as={Col} md="8" controlId="validationCustom01">
                             <Form.Label>Add Items</Form.Label>
                             <Form.Control
                                 required
-                                select
                                 type="text"
                                 placeholder="add items to the list"
                                 onChange={(event) => {
@@ -46,18 +47,29 @@ class InputComp extends Component {
                         </Form.Group>
                         <Form.Group as={Col} md="3" controlId="exampleForm.ControlSelect1">
                             <Form.Label>select Bucket</Form.Label>
-                            <Form.Control as="select" onChange={(event) => {
-                                this.selectBucket(event.target.value)
-                            }}>
-                                <option>1</option>
-                                <option>2</option>
+                            <Form.Control as="select"  
+                            custom onChange={(event) => {
+                                this.selectBucket(event.target.value,event)
+                            }}
+                            >
+                                <option>select Bucket</option>
+                                {this.props.bucketlist.map((data,index)=>{
+                                    return(<option 
+                                        key = {data.id}
+                                        value={data.id}
+                                        bucketid = {data.id}>
+                                        {data.description}
+                                        </option>)
+                                })
+                                }
                             </Form.Control>
                         </Form.Group>
                         <Form.Group as={Col} md="2">
                             <Button variant="primary" onClick={() => { this.props.addTask(
                                 this.state.userInput,
                                 this.state.selectedBucket,
-                                this.state.type
+                                this.state.selectedBucketId,
+                                this.props.type
                             ) }}>Add Items</Button>
                         </Form.Group>
                     </>
@@ -67,7 +79,6 @@ class InputComp extends Component {
                             <Form.Label>Add Buckets</Form.Label>
                             <Form.Control
                                 required
-                                select
                                 type="text"
                                 placeholder="Add buckets"
                                 onChange={(event) => {
@@ -80,7 +91,7 @@ class InputComp extends Component {
                             <div>
                                 <Button variant="primary" onClick={() => { this.props.addBucket(
                                     this.state.userInput,
-                                    this.state.type
+                                    this.props.type
                                 ) }}>Submit</Button>
                             </div>
                         </Form.Group>

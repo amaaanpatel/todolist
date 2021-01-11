@@ -36,7 +36,7 @@ def deleteBucket(request):
     print(data)
     conn =  mysql.connection
     query = "DELETE FROM bucket WHERE id = {}".format(data['itemId'])
-    query2 = "DELETE FROM todo WHERE id = {}".format(data['itemId'])
+    query2 = "DELETE FROM todo WHERE bucketid = {}".format(data['itemId'])
     print(query,query2)
     conn.cursor().execute(query)  
     conn.cursor().execute(query2)    

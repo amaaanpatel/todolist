@@ -13,9 +13,9 @@ export async function getHomePageData() {
     }
 }
 
-export async function insertList(userInput,selectedBucket) {
+export async function insertList(userInput,selectedBucket,bucketId) {
     try {
-        let resp = await axios.post('http://localhost:5000/insertlist',{desc:userInput,bucket:selectedBucket},{
+        let resp = await axios.post('http://localhost:5000/insertlist',{desc:userInput,bucket:selectedBucket,bucketId,bucketId},{
             headers: {
                 'Content-Type': 'application/json',
             }

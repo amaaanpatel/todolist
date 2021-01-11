@@ -3,22 +3,25 @@ from app import mysql
 
 def homeController():
   try:
+    data = {}
     conn =  mysql.connection.cursor()
     conn.execute("SELECT * FROM todo")
-    data=conn.fetchall()
-    return jsonify(data)
+    data['list']=conn.fetchall()
+    conn.execute("SELECT * FROM bucket")
+    data['bucket']=conn.fetchall()
+    return jsonify({"status":"true","data":data})
     
 
   except Exception as e:
     print("error",e)
-    return jsonify([])
+    return jsonify({"status":"false"})
   
   
 def insertList(request):
   try:
     data = request.get_json()
     conn =  mysql.connection
-    query = "INSERT INTO todo (DESCRIPTION,bucketid) VALUES ('{}',{})".format(data['desc'],data["bucket"])
+    query = "INSERT INTO todo (DESCRIPTION,bucketid) VALUES ('{}',{})".format(data['desc'],data["bucketId"])
     print(query)
     conn.cursor().execute(query)   
     print(conn.insert_id())

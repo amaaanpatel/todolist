@@ -48,7 +48,7 @@ class bucket extends Component {
         }
     }
 
-    updateItems = async(userInput,itemId)=>{
+    updateItems = async(userInput,ischecked,itemId)=>{
         console.log(userInput,itemId);
         let resp = await updateBucket(userInput,itemId);
     }

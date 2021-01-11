@@ -15,26 +15,34 @@ class Home extends Component {
         super();
         this.state = {
             items: [],
+            bucket:[],
             taskInput: "",
 
         }
     }
    async  componentDidMount() {
         let homedata = await getHomePageData();
-        this.setState({
-            items:homedata
-        })
+        if(homedata.status) {
+            this.setState({
+                items:homedata.data.list,
+                bucket:homedata.data.bucket
+            })
+        }
     }
     //add the items to the to do list 
-    addTask = async (userInput,selectedBucket,type) => {
+    addTask = async (userInput,selectedBucket,bucketId,type) => {
         if(selectedBucket == '') {
+            alert("please select bucket")
             return
         }
-        let resp = await insertList(userInput,selectedBucket,type);
+        let resp = await insertList(userInput,selectedBucket,bucketId,type);
         console.log(resp);
         if(resp.status) {
         let items = this.state.items
-        items.push({ description: userInput, isChecked: false, bucketName:selectedBucket,id:resp.id})
+        items.push({ description: userInput, isChecked: false, 
+            bucketName:selectedBucket,
+            id:resp.id,
+            bucketid:bucketId})
         this.setState({ items: items })
         }
     }
@@ -72,6 +80,7 @@ class Home extends Component {
                                 <InputComp
                                     type="todolist"
                                     Bucket={this.selectBucket}
+                                    bucketlist={this.state.bucket}
                                     addTask={this.addTask}
                                 />
                             </div>
@@ -82,7 +91,8 @@ class Home extends Component {
                                             return (
                                                 <Items 
                                                 key={item.id} 
-                                                type="todolist" item={item} 
+                                                type="todolist" 
+                                                item={item}
                                                 deleteItems = {this.deleteItems}
                                                 updateItems={this.updateItems}
                                                 />

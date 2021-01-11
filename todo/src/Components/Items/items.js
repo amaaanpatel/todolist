@@ -75,7 +75,7 @@ class Items extends Component {
                                     checked={this.state.isChecked == "true" ? true: false} 
                                     label="Done" 
                                     onChange={(event)=>{this.itemChecked(event.target.checked)}}/>
-                                    <Badge variant="info" style={{ margin: '5px' }}>{this.props.item.bucketName}</Badge>
+                                    <Badge variant="info" style={{ margin: '5px' }}>{this.props.item.bucketid}</Badge>
                                 </>
                                 : null
                             }
