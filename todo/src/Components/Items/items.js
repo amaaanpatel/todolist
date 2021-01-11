@@ -45,9 +45,9 @@ class Items extends Component {
     
     //items complete checked
     itemChecked = async (data)=>{
-        console.log(data)
+        console.log(String(data))
         await this.setState({
-            isChecked:data
+            isChecked:String(data)
         })
         this.props.updateItems(this.state.desc,this.state.isChecked,this.state.itemId)
     }
@@ -72,7 +72,7 @@ class Items extends Component {
                             {this.props.type == 'todolist' ?
                                 <>
                                     <Form.Check type="checkbox" 
-                                    checked={this.state.isChecked} 
+                                    checked={this.state.isChecked == "true" ? true: false} 
                                     label="Done" 
                                     onChange={(event)=>{this.itemChecked(event.target.checked)}}/>
                                     <Badge variant="info" style={{ margin: '5px' }}>{this.props.item.bucketName}</Badge>
