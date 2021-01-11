@@ -40,3 +40,18 @@ export async function deletItem(itemId) {
 
     }
 }
+
+export async function updateItem(desc,mDone,itemId) {
+    try {
+        let resp = await axios.post('http://localhost:5000/updateitem',{desc:desc,mDone:mDone,itemId:itemId},{
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        });
+        console.log(resp.data);
+        return resp.data
+    } catch (error) {
+
+    }
+}
+

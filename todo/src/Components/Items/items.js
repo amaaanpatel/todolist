@@ -16,7 +16,7 @@ class Items extends Component {
     componentDidMount() {
         console.log(this.props.item)
         this.setState({
-            isChecked:this.props.item.isChecked,
+            isChecked:this.props.item.ischecked,
             desc:this.props.item.description,
             itemId:this.props.item.id
         })
@@ -24,7 +24,7 @@ class Items extends Component {
     //update the todo task
     updateTask = (data)=>{
         this.setState({
-            task:data
+            desc:data
         })
     }
     //edit items 
@@ -40,13 +40,16 @@ class Items extends Component {
             disableInput:true,
             is_edit:false
         })
+        this.props.updateItems(this.state.desc,this.state.isChecked,this.state.itemId)
     }
     
     //items complete checked
-    itemChecked = (data)=>{
-        this.setState({
+    itemChecked = async (data)=>{
+        console.log(data)
+        await this.setState({
             isChecked:data
         })
+        this.props.updateItems(this.state.desc,this.state.isChecked,this.state.itemId)
     }
     render() {
         return (

@@ -4,7 +4,7 @@ import Items from '../../Components/Items/items';
 import InputComp from '../../Components/InputComp/InputComp';
 // importing the components from react Bootstrap
 import { Container,ListGroup } from 'react-bootstrap';
-import { getHomePageData,insertList ,deletItem} from '../../Actions/homedata'
+import { getHomePageData,insertList ,deletItem,updateItem} from '../../Actions/homedata'
 // import css
 import './Home.css'
 
@@ -55,6 +55,10 @@ class Home extends Component {
             this.setState({ items: items_array })
         }
     }
+    updateItems = async(userInput,isChecked,itemId)=>{
+        console.log(userInput,isChecked,itemId);
+        let resp = await updateItem(userInput,isChecked,itemId);
+    }
 
     render() {
         return (
@@ -79,7 +83,9 @@ class Home extends Component {
                                                 <Items 
                                                 key={item.id} 
                                                 type="todolist" item={item} 
-                                                deleteItems = {this.deleteItems}/>
+                                                deleteItems = {this.deleteItems}
+                                                updateItems={this.updateItems}
+                                                />
                                             )
                                         })
                                     }

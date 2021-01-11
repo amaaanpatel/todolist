@@ -17,4 +17,8 @@ def insertList():
 def deleteItem():
   return homeController.deleteItem(request)
 
+@app.route('/updateitem',methods = ['POST'])
+def updateitem():
+  return homeController.updateItem(request)
+
 

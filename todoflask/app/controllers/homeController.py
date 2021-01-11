@@ -43,3 +43,18 @@ def deleteItem(request):
   except Exception as e:
     print("error",e)
     return jsonify({"status":"false"})
+  
+  
+def updateItem(request):
+  try:
+    data = request.get_json()
+    print(data)
+    conn =  mysql.connection
+    query = "UPDATE todo SET description = '{}' , ischecked = '{}' WHERE id = {}".format(data['desc'],data['mDone'],data['itemId'])
+    print(query)
+    conn.cursor().execute(query)   
+    conn.commit()
+    return jsonify({"status":"true"})
+  except Exception as e:
+    print("error",e)
+    return jsonify({"status":"false"})
