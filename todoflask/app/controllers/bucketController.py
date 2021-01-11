@@ -14,20 +14,20 @@ def bucketList():
     return jsonify([])
   
   
-# def insertList(request):
-#   try:
-#     data = request.get_json()
-#     conn =  mysql.connection
-#     query = "INSERT INTO todo (DESCRIPTION,bucketid) VALUES ('{}',{})".format(data['desc'],data["bucket"])
-#     print(query)
-#     conn.cursor().execute(query)   
-#     print(conn.insert_id())
-#     insertId = conn.insert_id()
-#     conn.commit()
-#     return jsonify({"status":"true","id":insertId})
-#   except Exception as e:
-#     print("error",e)
-#     return jsonify({"status":false})
+def insertBucket(request):
+  try:
+    data = request.get_json()
+    conn =  mysql.connection
+    query = "INSERT INTO bucket (DESCRIPTION) VALUES ('{}')".format(data['desc'])
+    print(query)
+    conn.cursor().execute(query)   
+    print(conn.insert_id())
+    insertId = conn.insert_id()
+    conn.commit()
+    return jsonify({"status":"true","id":insertId})
+  except Exception as e:
+    print("error",e)
+    return jsonify({"status":"false"})
   
   
 # def deleteItem(request):

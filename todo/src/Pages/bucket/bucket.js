@@ -4,7 +4,7 @@ import Items from '../../Components/Items/items';
 import InputComp from '../../Components/InputComp/InputComp';
 // importing the components from react Bootstrap
 import { Container, ListGroup } from 'react-bootstrap';
-import { getBucket} from '../../Actions/bucket'
+import { getBucket,insertBucket} from '../../Actions/bucket'
 
 class bucket extends Component {
     constructor() {
@@ -21,12 +21,16 @@ class bucket extends Component {
         this.setState({items:resp})
     }
     //add bucket
-    addBucket = (userInput,type) => {
-        let bucketItems = this.state.items
-        bucketItems.push({desc:userInput,type:"bucket",id:5});
-        this.setState({item:bucketItems})
-        
+    addBucket = async (userInput,type) => {
+        let resp = await insertBucket(userInput);
+        console.log(resp);
+        if (resp.status) {
+            let bucketItems = this.state.items
+            bucketItems.push({description:userInput,type:"bucket",id:resp.id});
+            this.setState({item:bucketItems})
+        }        
     }
+
     render() {
         return (
             <div>

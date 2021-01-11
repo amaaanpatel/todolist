@@ -8,9 +8,9 @@ from app.controllers import bucketController
 def bucketList():
   return bucketController.bucketList()
 
-# @app.route('/insertlist',methods = ['POST'])
-# def insertList():
-#   return homeController.insertList(request)
+@app.route('/insertbucket',methods = ['POST'])
+def insertBucket():
+  return bucketController.insertBucket(request)
 
 
 # @app.route('/deleteitems',methods = ['POST'])
