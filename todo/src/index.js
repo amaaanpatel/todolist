@@ -4,6 +4,7 @@ import './index.css';
 import Home from './Pages/Home/Home'
 import bucket from './Pages/bucket/bucket'
 import reportWebVitals from './reportWebVitals';
+import About from './Pages/about/about'
 import {
   Route,
   BrowserRouter as Router,
@@ -17,6 +18,7 @@ ReactDOM.render(
       <Switch>
         <Route exact path="/" component={Home} />
         <Route exact path="/bucket" component={bucket} />
+        <Route exact path="/about" component={About} />
       </Switch>
     </Router>
   </React.StrictMode>,
