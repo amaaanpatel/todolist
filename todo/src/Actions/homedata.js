@@ -1,7 +1,7 @@
 import axios from 'axios';
 export async function getHomePageData() {
     try {
-        let resp = await axios.get('http://localhost:5000/home',{
+        let resp = await axios.get('http://52.66.134.20:8081/home',{
             headers: {
                 'Content-Type': 'application/json',
             }
@@ -15,7 +15,7 @@ export async function getHomePageData() {
 
 export async function insertList(userInput,selectedBucket,bucketId) {
     try {
-        let resp = await axios.post('http://localhost:5000/insertlist',{desc:userInput,bucket:selectedBucket,bucketId,bucketId},{
+        let resp = await axios.post('http://52.66.134.20:8081/insertlist',{desc:userInput,bucket:selectedBucket,bucketId,bucketId},{
             headers: {
                 'Content-Type': 'application/json',
             }
@@ -29,7 +29,7 @@ export async function insertList(userInput,selectedBucket,bucketId) {
 
 export async function deletItem(itemId) {
     try {
-        let resp = await axios.post('http://localhost:5000/deleteitems',{itemId:itemId},{
+        let resp = await axios.post('http://52.66.134.20:8081/deleteitems',{itemId:itemId},{
             headers: {
                 'Content-Type': 'application/json',
             }
@@ -43,7 +43,7 @@ export async function deletItem(itemId) {
 
 export async function updateItem(desc,mDone,itemId) {
     try {
-        let resp = await axios.post('http://localhost:5000/updateitem',{desc:desc,mDone:mDone,itemId:itemId},{
+        let resp = await axios.post('http://52.66.134.20:8081/updateitem',{desc:desc,mDone:mDone,itemId:itemId},{
             headers: {
                 'Content-Type': 'application/json',
             }
