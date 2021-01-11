@@ -41,3 +41,18 @@ export async function deleteBucket(itemId) {
     }
 }
 
+export async function updateBucket(desc,itemId) {
+    try {
+        let resp = await axios.post('http://localhost:5000/updatebucket',{desc:desc,itemId:itemId},{
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        });
+        console.log(resp.data);
+        return resp.data
+    } catch (error) {
+
+    }
+}
+
+

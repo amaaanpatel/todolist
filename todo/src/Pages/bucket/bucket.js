@@ -4,7 +4,7 @@ import Items from '../../Components/Items/items';
 import InputComp from '../../Components/InputComp/InputComp';
 // importing the components from react Bootstrap
 import { Container, ListGroup } from 'react-bootstrap';
-import { getBucket,insertBucket,deleteBucket} from '../../Actions/bucket'
+import { getBucket,insertBucket,deleteBucket,updateBucket} from '../../Actions/bucket'
 
 class bucket extends Component {
     constructor() {
@@ -35,17 +35,22 @@ class bucket extends Component {
     deleteItems = async (itemId)=>{
         let resp = await deleteBucket(itemId);
         console.log(resp)
-        // if(resp.status) {
-        //     let items_array = this.state.items
-        //     let itemindex = "";
-        //     items_array = items_array.filter((data,index)=>{
-        //         if(data.id != itemId) {
-        //             return true
-        //         }
-        //         return false
-        //     })
-        //     this.setState({ items: items_array })
-        // }
+        if(resp.status) {
+            let items_array = this.state.items
+            let itemindex = "";
+            items_array = items_array.filter((data,index)=>{
+                if(data.id != itemId) {
+                    return true
+                }
+                return false
+            })
+            this.setState({ items: items_array })
+        }
+    }
+
+    updateItems = async(userInput,itemId)=>{
+        console.log(userInput,itemId);
+        let resp = await updateBucket(userInput,itemId);
     }
 
     render() {
@@ -72,6 +77,7 @@ class bucket extends Component {
                                                 type = "bucket"
                                                 deleteItems = {this.deleteItems} 
                                                 item={item} 
+                                                updateItems={this.updateItems}
                                                 />
                                             )
                                         })
