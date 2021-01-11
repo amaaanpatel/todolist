@@ -4,16 +4,21 @@ import Items from '../../Components/Items/items';
 import InputComp from '../../Components/InputComp/InputComp';
 // importing the components from react Bootstrap
 import { Container, ListGroup } from 'react-bootstrap';
+import { getBucket} from '../../Actions/bucket'
 
 class bucket extends Component {
     constructor() {
         super();
         this.state = {
-            items: [{desc: "one",type:"bucket",id:1},
-            { desc: "two" ,type:"bucket",id:2}],
+            items: [],
             taskInput: "",
 
         }
+    }
+    async componentDidMount() {
+        let resp =  await getBucket();
+        console.log(resp);
+        this.setState({items:resp})
     }
     //add bucket
     addBucket = (userInput,type) => {
@@ -22,7 +27,6 @@ class bucket extends Component {
         this.setState({item:bucketItems})
         
     }
-
     render() {
         return (
             <div>
@@ -42,7 +46,9 @@ class bucket extends Component {
                                     {
                                         this.state.items.map((item, index) => {
                                             return (
-                                                <Items type = "bucket" 
+                                                <Items 
+                                                key={item.id}
+                                                type = "bucket" 
                                                 item={item} 
                                                 />
                                             )
