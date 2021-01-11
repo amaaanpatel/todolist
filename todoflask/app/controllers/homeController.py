@@ -50,7 +50,7 @@ def updateItem(request):
     data = request.get_json()
     print(data)
     conn =  mysql.connection
-    query = "UPDATE todo SET description = '{}' , ischecked = '{}' WHERE id = {}".format(data['desc'],data['mDone'],data['itemId'])
+    query = "UPDATE todo SET description = '{}' , ischecked = '{}' WHERE id = {}".format(data['desc'],str(data['mDone']).lower(),data['itemId'])
     print(query)
     conn.cursor().execute(query)   
     conn.commit()

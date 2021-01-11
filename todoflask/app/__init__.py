@@ -9,10 +9,10 @@ app = Flask(__name__)
 #run the falsk app in debug mode
 app.config['DEBUG'] = True
 
-app.config['MYSQL_HOST'] = 'localhost'
-app.config['MYSQL_USER'] = 'amaan'
-app.config['MYSQL_PASSWORD'] = 'password'
-app.config['MYSQL_DB'] = 'local'
+app.config['MYSQL_HOST'] = '52.66.134.20'
+app.config['MYSQL_USER'] = 'test'
+app.config['MYSQL_PASSWORD'] = 'Amaan@211991'
+app.config['MYSQL_DB'] = 'fract'
 app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
 
 mysql = MySQL(app)
