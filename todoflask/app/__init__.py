@@ -1,11 +1,13 @@
 import os,json,datetime
 from flask import Flask,jsonify, request, make_response, send_from_directory
 from flask_mysqldb import MySQL
+from flask_cors import CORS
 
 
 
 # create the flask object
 app = Flask(__name__)
+CORS(app)
 #run the falsk app in debug mode
 app.config['DEBUG'] = True
 
